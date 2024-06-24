@@ -1,25 +1,10 @@
 import streamlit as st
 import openai
 import yfinance as yf  # Import yfinance for financial data
-from dotenv import load_dotenv  # For secure API key loading
-import os
 
-# Load environment variables (recommended for production)
-load_dotenv()
 
-# Securely retrieve OpenAI API key from environment variable (if set)
-openai_api_key = os.getenv("OPENAI_API_KEY")
-
-if not openai_api_key:
-    # Prompt user for API key if not found in environment variables
-    openai_api_key = st.text_input("OpenAI API Key", type="password")
-
-# Set OpenAI API key (securely stored)
-if openai_api_key:
-    openai.api_key = openai_api_key
-    st.info("Using provided API key for OpenAI communication.")
-else:
-    st.warning("No API key found in environment variables. Ensure 'OPENAI_API_KEY' is set for optimal functionality.")
+openai.api_key = st.text_input("OpenAI API Key", type="password")
+st.info("Using provided API key for OpenAI communication.")
 
 # Streamlit app title and description
 st.title("AI Investment Agent ")
